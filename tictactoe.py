@@ -71,10 +71,9 @@ def check_win(board, current_player):
 # Create a function to check for a tie. This function should take the game board as a parameter and check if every square on the board has been filled.
 def check_tie(board):
     for row in board:
-        if any(square == ' ' for square in board):
-            game_running = False
+        if any(square == ' ' for square in row):
             return False
-
+        game_running = False
     return True
 
 
@@ -87,4 +86,5 @@ while game_running:
         print(f'{current_player} has win (:')
     if check_tie(board)and not check_win(board, current_player):
         print('tie')
+        break
     switch_player()
