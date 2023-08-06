@@ -73,7 +73,6 @@ def check_tie(board):
     for row in board:
         if any(square == ' ' for square in row):
             return False
-        game_running = False
     return True
 
 
