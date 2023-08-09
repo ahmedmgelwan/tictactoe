@@ -21,9 +21,14 @@ current_player = 'X'
 
 
 def player_move(board):
-
-    row = int(input('Enter row number [1-3]: ')) - 1
-    col = int(input('Enter column number [1-3]: ')) - 1
+    try:
+        row = int(input('Enter row number [1-3]: ')) - 1
+        col = int(input('Enter column number [1-3]: ')) - 1
+    except ValueError:
+        print('Value must be a number between 1 and 3')
+        row = int(input('Enter row number [1-3]: ')) - 1
+        col = int(input('Enter column number [1-3]: ')) - 1
+        
     if row > 3 or col > 3:
         print('Invalid Input')
         row = int(input('Enter row number [1-3]: ')) - 1
