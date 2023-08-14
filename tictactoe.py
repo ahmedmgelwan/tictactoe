@@ -19,21 +19,25 @@ def print_board(board):
 # Create a function to handle player moves. This function should take the game board and the current player's symbol as parameters, prompt the player for their move (using input()), and update the game board with the player's symbol in the appropriate location.
 current_player = 'X'
 
-
+def get_input(board):
+    row = int(input('Enter row number [1-3]: ')) - 1
+    col = int(input('Enter column number [1-3]: ')) - 1
+    return row, col
 def player_move(board):
     try:
-        row = int(input('Enter row number [1-3]: ')) - 1
-        col = int(input('Enter column number [1-3]: ')) - 1
+        row, col = get_input(board=board)
+        if 0 <= row <=2 and  0 <= col <=2:
+            if board[row][col] == ' ':
+                board[row][col] = current_player
+            else:
+                print('You can not go to this square')
+        else:
+            print('Invalid Input, Value must be a number between 1 and 3')
+
     except ValueError:
-        print('Value must be a number between 1 and 3')
-        row = int(input('Enter row number [1-3]: ')) - 1
-        col = int(input('Enter column number [1-3]: ')) - 1
-        
-    if row > 3 or col > 3:
-        print('Invalid Input')
-        row = int(input('Enter row number [1-3]: ')) - 1
-        col = int(input('Enter column number [1-3]: ')) - 1
-    board[row][col] = current_player
+        print('Invalid Input, Value must be a number between 1 and 3 not chars')
+
+
 
 
 def switch_player():
