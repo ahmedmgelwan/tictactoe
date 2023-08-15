@@ -17,7 +17,12 @@ def print_board(board):
 
 
 # Create a function to handle player moves. This function should take the game board and the current player's symbol as parameters, prompt the player for their move (using input()), and update the game board with the player's symbol in the appropriate location.
-current_player = 'X'
+
+
+current_player = input('Player: ').upper()
+if current_player != 'X' or current_player != 'O':
+    print('Player must be X or O')
+    current_player = input('Player: ').upper()
 
 def get_input(board):
     row = int(input('Enter row number [1-3]: ')) - 1
@@ -31,6 +36,10 @@ def player_move(board):
                 board[row][col] = current_player
             else:
                 print('You can not go to this square')
+                row, col = get_input(board)
+                if 0 <= row <=2 and  0 <= col <=2:
+                    if board[row][col] == ' ':
+                        board[row][col] = current_player
         else:
             print('Invalid Input, Value must be a number between 1 and 3')
 
@@ -86,13 +95,16 @@ def check_tie(board):
 
 
 # Create a main game loop that alternates between the two players. In each iteration of the loop, print the current state of the game board, prompt the current player for their move, update the game board with the player's symbol, and check if the game has been won or tied. If the game has been won or tied, end the loop and print the appropriate message. Test the game by playing it and checking that it correctly handles player moves, checks for wins and ties, and prints the appropriate messages. Debug any issues that arise.
+
 while game_running:
     print(f'Current Player: {current_player}')
     print_board(board=board)
     player_move(board)
     if check_win(board, current_player):
+        print_board(board)
         print(f'{current_player} has win (:')
     if check_tie(board)and not check_win(board, current_player):
+        print_board(board)
         print('tie')
         break
     switch_player()
